@@ -1,25 +1,39 @@
 #include "DHT.h"
 
 #define DHTPIN 15     // Digital pin connected to the DHT sensor
-//#define DHTTYPE DHT11   // DHT 11
-#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+#define DHTTYPE DHT11   // DHT 11
+//#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 DHT dht(DHTPIN, DHTTYPE);
+int estadoBoton = 0;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println(F("DHTxx test!"));
+  Serial.println("DHTxx test!");
 
   dht.begin();
-
+  pinMode(13, INPUT);
   pinMode(14, OUTPUT);
 }
 
 void loop() {
   digitalWrite(14, HIGH);
-  delay(2000);
+  delay(500);
   digitalWrite(14, LOW);
-  delay(2000);
+  delay(500);
+  estadoBoton = digitalRead(13);
+  Serial.println("valor: " + String(estadoBoton));
+  
+  if(estadoBoton == 0){
+    Serial.println("Boton DESactivado: ");
+    delay(1000);
+  }
+  else{
+    Serial.print("Boton activado: ");
+    delay(1000);
+  }
 
+  
+  
   float h = dht.readHumidity();
   float t = dht.readTemperature();
 
@@ -27,13 +41,15 @@ void loop() {
     Serial.println(F("Failed to read from DHT sensor!"));
     return;
   }
-
-
+  else{
   Serial.print(F("Humidity: "));
   Serial.print(h);
   Serial.print(F("%  Temperature: "));
   Serial.print(t);
+  }
+  
 
+  
   
 /*
   // Reading temperature or humidity takes about 250 milliseconds!
