@@ -66,6 +66,16 @@ void setup() {
 }
 
 void loop() {
+  
+  lectura();
+
+  logica();
+  
+  salidas();
+  
+}
+
+void lectura(){
   //lectura de botones
   estadoBoton1 = digitalRead(13);
   estadoBoton2 = digitalRead(14);
@@ -77,13 +87,19 @@ void loop() {
   else if(t > 28)
     temBool = true;
 
+}
+
+void logica(){
   //logica
   //B3Temp + B2Temp + B1
   led1 = estadoBoton3 & temBool | estadoBoton2 & temBool | estadoBoton1;
 
   //Temp + B3 + B2
   led2 = temBool | estadoBoton3 | estadoBoton2;
-  
+
+}
+
+void salidas(){
   if(led1 == true){
     digitalWrite(2, HIGH);
     delay(1000);
@@ -101,5 +117,5 @@ void loop() {
     digitalWrite(4, LOW);
     delay(1000);
   }
-  
+
 }
