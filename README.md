@@ -22,7 +22,8 @@ Led2: Refrigeración automática
 Comportamiento
 Entradas    B1, B2, B3, Temp (0 cuando temp <= 28, 1 cuando temp > 28)
 Salidas     Led1, Led2
-
+<h2>Tabla de verdad</h2>
+<pre>
 B1  B2  B3  Temp  Led1  Led2
 0   0   0   0     0     0
 0   0   0   1     0     1
@@ -43,3 +44,16 @@ B1  B2  B3  Temp  Led1  Led2
 
 Led1 = B3Temp + B2Temp + B1
 Led2 = Temp + B3 + B2
+</pre>
+
+Conexiones: DHT11, Leds, Botones y ESP32 CAM <br>
+**Nota. Para este caso practico se utilizó un arudino Mega. Las conexiones con el ESP32 son las mismas.**
+<pre>
+ESP32 CAM (Arduino Mega)  DHT11     Actuadores<br>
+13                                  Botón1
+14                                  Botón2
+15                                  Botón3
+16                        Dato
+2                                   Led1
+4                                   Led2
+</pre>
