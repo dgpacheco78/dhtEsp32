@@ -45,7 +45,7 @@ DHT11 12
 */
 #include "DHT.h"
 
-#define DHTPIN 15     // Digital pin connected to the DHT sensor
+#define DHTPIN 16     // Digital pin connected to the DHT sensor
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 DHT dht(DHTPIN, DHTTYPE);
@@ -71,7 +71,14 @@ void loop() {
   estadoBoton2 = digitalRead(14);
   estadoBoton3 = digitalRead(15);
 
+  Serial.println("Boton1: " + String(estadoBoton1));
+  Serial.println("Boton2: " + String(estadoBoton2));
+  Serial.println("Boton3: " + String(estadoBoton3));
+
+  delay(500);
+
   float t = dht.readTemperature();
+  Serial.println("Temperatura: " + String(t));
   if(t <= 28)
     temBool = false;
   else if(t > 28)
